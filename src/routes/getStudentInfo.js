@@ -4,6 +4,8 @@ const Authenticate = require("../middleware/authenticate");
 const USER = require("../modelschemas/userschema");
 const router = express.Router();
 
+console.log("suemsh");
+
 router.post("/upload_stud", Authenticate, async (req, res) => {
   const {
     python,
