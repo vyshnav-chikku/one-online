@@ -29,7 +29,15 @@ app.use("/uploads", express.static(path.join("uploads")));
 
 require("./db/conn");
 
-const port = 5000;
+const port = process.env.PORT || 5000;
+
+if (process.env.NODE_ENV == "production") {
+  const path = require("path");
+  app.use(express.static(path.join("client/build")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve("client/build", "index.html"));
+  });
+}
 
 app.listen(port, () => {
   console.log(`server running at port ${port}`);
